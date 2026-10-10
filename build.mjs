@@ -26,7 +26,8 @@ const JS_V = ver("site.js");
 const CRANE = `<svg viewBox="0 0 34 22" aria-hidden="true"><path d="M2 14 Q9 2 17 11 Q25 2 32 14"/></svg>`;
 writeFileSync(join(OUT, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 22"><path d="M2 14 Q9 2 17 11 Q25 2 32 14" fill="none" stroke="#0A7480" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
 
-const NAV = [["Calendar", "/calendar/"], ["Sites", "/sites/"], ["Articles", "/articles/"], ["Routes", "/routes/"], ["Guides", "/guides/"], ["Stay", "/stay/"]];
+const casa = (src) => `${SITE.casaUrl}?utm_source=wilddehesa&utm_medium=referral&utm_campaign=${src}`;
+const NAV = [["Calendar", "/calendar/"], ["Sites", "/sites/"], ["Articles", "/articles/"], ["Routes", "/routes/"], ["Guides", "/guides/"], ["Stay", "/stay/"], ["Groups", "/groups/"]];
 const pages = [];
 
 function goLink(name) {
@@ -90,7 +91,7 @@ ${body}
       <div>
         <a class="brand" href="/" style="margin-bottom:14px">${CRANE}${SITE.name}</a>
         <p>Birdwatching in Extremadura, Spain. Please keep your distance from nests in the breeding season, stay on tracks, and listen as much as you look, since many species are found by their calls.</p>
-        <p style="margin-top:14px">Written from Hoyos, in the Sierra de Gata. Stay with us at <a href="${SITE.casaUrl}" target="_blank" rel="noopener">${SITE.casaName}</a>. Contact: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
+        <p style="margin-top:14px">Written from Hoyos, in the Sierra de Gata. Stay with us at <a href="${casa("footer")}" target="_blank" rel="noopener">${SITE.casaName}</a>. Contact: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
         <p class="mono" style="margin-top:18px"><a href="/privacy/">Privacy</a> · Facts are checked against official sources and are being reviewed with local guides.</p>
       </div>
       <div>
@@ -554,9 +555,34 @@ ${ROUTES.map((r) => `<div class="route" id="${r.slug}"><h2>${esc(r.title)}</h2><
 <div class="body-text">
 <p>The house sleeps up to 10 in five bedrooms, or 12 with the sofa bed, so it suits a small birding group as well as a couple.</p>
 <p>After a day in the field there is a lounge with a fireplace, a library, and a garden of olive and fruit trees with a pool and a shaded barbecue patio. Nearby villages include Robledillo de Gata, Trevejo and San Martín de Trevejo, with hiking trails through forests and mountains.</p>
-<p>Staying for the birds? Tell us what you want to see and we will help you plan the days. See the <a href="/routes/">three-day routes</a> and the <a href="/sites/sierra-de-gata/">Sierra de Gata guide</a>.</p>
+<p>Staying for the birds? Tell us what you want to see and we will help you plan the days. See the <a href="/routes/">three-day routes</a> and the <a href="/sites/sierra-de-gata/">Sierra de Gata guide</a>. Travelling as a club or tour group? See <a href="/groups/">birding groups</a>.</p>
 </div>
-<div class="callout"><h2>Book direct</h2><p>Availability, rates and booking are on the casa's own site.</p><p><a class="btn primary" href="${SITE.casaUrl}" target="_blank" rel="noopener">Visit casasierradegata.com</a></p><p>Questions about birding trips: <a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
+<div class="callout"><h2>Book direct</h2><p>Availability, rates and booking are on the casa's own site.</p><p><a class="btn primary" href="${casa("stay")}" target="_blank" rel="noopener">Visit casasierradegata.com</a></p><p>Questions about birding trips: <a href="mailto:${SITE.email}">${SITE.email}</a></p></div>
+</div></div></section>`,
+  });
+}
+
+// ---------- Groups ----------
+{
+  const c = crumbs([["Home", "/"], ["Groups", "/groups/"]]);
+  const gm = (subject) => `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}`;
+  addPage({
+    path: "/groups/",
+    title: "Birding groups and tour operators in Extremadura | Wild Dehesa",
+    description: "A base for birdwatching clubs, tour operators and small groups in the Sierra de Gata, Extremadura. Sleeps up to 10, with route planning and local guides on request.",
+    ld: [c.ld],
+    body: `${c.html}
+<div class="wrap pagehead"><h1>For birding groups and tour operators</h1><p class="lede">A whole house in the Sierra de Gata for a club, a family party or a small tour, with route planning for Monfragüe, the steppe and the reservoirs.</p></div>
+<section style="padding-top:24px"><div class="wrap"><div class="split">
+<div class="body-text">
+<h2>The house</h2>
+<p>${SITE.casaName} sleeps up to 10 in five bedrooms, or 12 with the sofa bed. It has a lounge with a fireplace, a library, a garden and a pool, and it sits on the edge of Hoyos, a village on the official Sierra de Gata birding route.</p>
+<h2>What we can help plan</h2>
+<p>We can sketch day-by-day itineraries around the <a href="/calendar/">season you travel in</a>, drawing on our guides to <a href="/sites/monfrague/">Monfragüe</a>, the <a href="/sites/sierra-de-gata/">Sierra de Gata</a> and <a href="/sites/arrocampo/">Arrocampo</a>, and the ready-made <a href="/routes/">three-day routes</a>. If you want a licensed local guide, tell us and we will ask around. See <a href="/guides/">local guides</a>.</p>
+<h2>Tell us about your trip</h2>
+<p>Send your dates, group size, the species you most want and whether you need a guide. We reply by email. For rates and availability the casa's own site is the booking point.</p>
+</div>
+<div class="callout"><h2>Plan a group trip</h2><p>Email dates, group size and target species.</p><p><a class="btn primary" href="${gm("Group enquiry")}">Email ${SITE.email}</a></p><p><a class="btn ghost" href="${casa("groups")}" target="_blank" rel="noopener">Casa availability and rates</a></p></div>
 </div></div></section>`,
   });
 }
