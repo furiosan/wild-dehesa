@@ -64,5 +64,4 @@ export const SOURCES = [
 export const COMING = [
   ["Llanos de Cáceres and Trujillo", "Wide steppe plains for bustards, larks and raptors, with the old town of Trujillo close by.", "Cáceres · Mar to May, winter"],
   ["La Serena", "Treeless grassland that tour operators rank among the best places in the world for steppe birds such as Little Bustard and sandgrouse.", "Badajoz · Apr to Jun"],
-  ["Arrocampo reservoir", "Reedbeds beside the Almaraz power station, where warm outflow draws a wide range of waterbirds and herons.", "Cáceres · Apr to Jun"],
 ];

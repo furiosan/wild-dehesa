@@ -35,6 +35,7 @@ function goLink(name) {
   if (/^Sierra de Gata/.test(name)) return "/sites/sierra-de-gata/";
   if (/^Borbollón/.test(name)) return "/sites/sierra-de-gata/#borbollon";
   if (/^Alagón/.test(name)) return "/sites/sierra-de-gata/#alagon";
+  if (/^Arrocampo/.test(name)) return "/sites/arrocampo/";
   return null;
 }
 const goItem = (name) => { const h = goLink(name); return h ? `<li><a href="${h}">${esc(name)}</a></li>` : `<li>${esc(name)}</li>`; };
@@ -165,10 +166,11 @@ addPage({
   <div class="wrap">
     <p class="mono kicker">Sites</p>
     <h2>Where to go</h2>
-    <p class="sub">Two full guides to start, with more sites on the way.</p>
+    <p class="sub">Three full guides to start, with more sites on the way.</p>
     <div class="sites">
       <article class="site"><h3><a href="/sites/monfrague/">Monfragüe National Park</a></h3><p>Cliffs, vultures and nesting Black Storks where the Tagus meets the Tiétar. The best single day in the region.</p><div class="meta"><span class="mono">Cáceres · Mar to May</span><a class="tag full" href="/sites/monfrague/" style="text-decoration:none">Read the guide</a></div></article>
       <article class="site"><h3><a href="/sites/sierra-de-gata/">Sierra de Gata and Borbollón</a></h3><p>Wintering cranes at the reservoir, oak and olive woods, and quiet stone villages on the official route.</p><div class="meta"><span class="mono">Cáceres · Nov to Feb</span><a class="tag full" href="/sites/sierra-de-gata/" style="text-decoration:none">Read the guide</a></div></article>
+      <article class="site"><h3><a href="/sites/arrocampo/">Arrocampo reservoir</a></h3><p>Reedbeds where swamphens, herons and bitterns give close views, with otters at dawn.</p><div class="meta"><span class="mono">Cáceres · Spring, autumn, winter</span><a class="tag full" href="/sites/arrocampo/" style="text-decoration:none">Read the guide</a></div></article>
     </div>
     <p style="margin-top:22px"><a href="/sites/">All sites, including those coming soon</a></p>
   </div>
@@ -248,6 +250,7 @@ MONTHS.forEach((m, i) => {
 <section style="padding-top:24px"><div class="wrap"><div class="sites">
 <article class="site"><h3><a href="/sites/monfrague/">Monfragüe National Park</a></h3><p>Cliffs, vultures and nesting Black Storks where the Tagus meets the Tiétar. The best single day in the region.</p><div class="meta"><span class="mono">Cáceres · Mar to May</span><span class="tag full">Guide</span></div></article>
 <article class="site"><h3><a href="/sites/sierra-de-gata/">Sierra de Gata and Borbollón</a></h3><p>Wintering cranes at the reservoir, oak and olive woods, and quiet stone villages on the official route.</p><div class="meta"><span class="mono">Cáceres · Nov to Feb</span><span class="tag full">Guide</span></div></article>
+<article class="site"><h3><a href="/sites/arrocampo/">Arrocampo reservoir</a></h3><p>Reedbeds beside the Almaraz power station, where warm, steady water draws swamphens, herons and bitterns.</p><div class="meta"><span class="mono">Cáceres · Spring, autumn, winter</span><span class="tag full">Guide</span></div></article>
 ${COMING.map(([n, t, meta]) => `<article class="site"><h3>${esc(n)}</h3><p>${esc(t)}</p><div class="meta"><span class="mono">${esc(meta)}</span><span class="tag">Coming soon</span></div></article>`).join("\n")}
 </div></div></section>`,
   });
@@ -340,6 +343,70 @@ ${COMING.map(([n, t, meta]) => `<article class="site"><h3>${esc(n)}</h3><p>${esc
 <div><dt class="mono">Best months</dt><dd>November to February for cranes, spring for woodland birds</dd></div>
 <div><dt class="mono">Star birds</dt><dd>Common Crane, Spanish Imperial Eagle, Black-winged Kite, Black Stork</dd></div>
 <div><dt class="mono">Villages</dt><dd>Robledillo de Gata, Hoyos, Trevejo, San Martín de Trevejo, Gata</dd></div>
+</dl>
+</aside>
+</div></div></section>`,
+  });
+}
+
+// ---------- Arrocampo ----------
+{
+  const c = crumbs([["Home", "/"], ["Sites", "/sites/"], ["Arrocampo", "/sites/arrocampo/"]]);
+  const src = [
+    ["Arrocampo Reservoir, BirdForum Opus", "https://www.birdforum.net/opus/Arrocampo_Reservoir"],
+    ["Parque Periurbano Almaraz, Birding Places", "https://www.birdingplaces.eu/en/birdingplaces/spain/parque-periurbano-almaraz"],
+    ["Embalse de Arrocampo, Turismo Extremadura", "https://admin.turismoextremadura.juntaex.es/en/explora/Embalse-de-Arrocampo-00001"],
+    ["Squacco Heron, Birding in Extremadura", "https://birdinginextremadura.com/en/ave/garcilla-cangrejera-en/"],
+  ];
+  addPage({
+    path: "/sites/arrocampo/",
+    title: "Birdwatching at Arrocampo reservoir, Extremadura | Wild Dehesa",
+    description: "Birdwatching at Arrocampo reservoir: reedbed herons, swamphens and bitterns, hides, easy trails, otters at dawn, and the best months to go.",
+    ogType: "article",
+    ld: [c.ld, { "@context": "https://schema.org", "@type": "Article", headline: "Birdwatching at Arrocampo reservoir", dateModified: SITE.updated, author: { "@type": "Organization", name: SITE.name }, publisher: { "@type": "Organization", name: SITE.name, url: SITE.url }, mainEntityOfPage: SITE.url + "/sites/arrocampo/" }],
+    body: `${c.html}
+<div class="wrap pagehead"><h1>Birdwatching at Arrocampo reservoir</h1><p class="lede">A reedbed reservoir in the Tagus valley where herons, swamphens and bitterns give close views, and otters sometimes appear at dawn.</p></div>
+<section style="padding-top:24px"><div class="wrap"><div class="article">
+<div class="prose">
+<h2>The reservoir in brief</h2>
+<p>Arrocampo is a dam on the Arrocampo river in Cáceres province, near where the river meets the Tagus, between the Campo Arañuelo region and <a href="/sites/monfrague/">Monfragüe National Park</a>. It was built to supply cooling water for the Almaraz nuclear power plant and was completed in 1983. It does not generate power or irrigate fields.</p>
+<p>That origin shapes the birding. The water level is held unusually steady and the water runs warmer than normal, which suits large reedbeds and birds that are hard to find elsewhere in the interior of the peninsula. The reservoir and its surroundings are a protected Special Protection Area within the Natura 2000 network. A meadow of holm oaks beside the water adds dehesa species to the wetland list.</p>
+<h2>What to see</h2>
+<h3>Spring and summer</h3>
+<p>The Western Swamphen breeds here in fairly large numbers and often gives close views. Purple Heron, Squacco Heron and Little Bittern are regular summer visitors, and the Squacco Heron is one of the breeding birds the regional guide names for Arrocampo. Savi's Warbler and Great Reed Warbler sing from the reeds. Black-winged Kite and European Bee-eater are also on the site list.</p>
+<h3>Autumn and winter</h3>
+<p>Great Bittern regularly overwinters, as does Bluethroat. Great White Egret has become fairly common in recent years. Grebes, Great Cormorant, Eurasian Spoonbill and Osprey add variety through the cooler months.</p>
+<h3>Otters</h3>
+<p>Otters are commonly seen, especially early in the morning from Hide 2.</p>
+<h2>Hides and access</h2>
+<p>There are several bird hides on the reservoir. One birder's guide describes five hides along the shore, with a visitors centre that issues the key and site maps and is closed on Sundays, when the key can be collected from a café by the municipal pool. It adds that the hides sit well back from the water, so much of the birding happens from the ramps leading up to them, and that Hide 2 is probably the best of the five.</p>
+<p>Another site describes easy, flat, mostly unpaved paths with a circular trail, ample parking, and access on foot, by bicycle or by wheelchair. It rates the site as good for families. A telescope is useful. Nearby Saucedilla has an ornithology park with information on routes in the area.</p>
+<p>These details come from published guides, one of them last updated in 2022. Opening arrangements change, so confirm the key and hours locally before you go.</p>
+<h2>When to go</h2>
+<p>Spring, autumn and winter are all recommended, with the spring and autumn migrations the best moments, and the site can be birded all year. Go early for otters. Summer suits swamphens and nesting herons, and winter suits bitterns. See the <a href="/calendar/april/">April</a>, <a href="/calendar/may/">May</a> and <a href="/calendar/december/">December</a> pages for what else is moving.</p>
+<h2>Combine it with</h2>
+<p>Arrocampo sits close to Monfragüe, so the two work well together. The <a href="/routes/#raptors-and-steppe">spring route</a> ends a day at Arrocampo before returning along the Sierra de Gata.</p>
+<div class="faq">
+<h2>Questions</h2>
+<h3>Is Arrocampo good for birdwatching in winter?</h3>
+<p>Yes. Great Bittern and Bluethroat regularly overwinter, and Great White Egret has become fairly common.</p>
+<h3>Can children or wheelchair users visit?</h3>
+<p>Birding Places describes flat, wide, mostly unpaved paths, a circular trail and wheelchair access, and calls the site suitable for families. Check current conditions locally.</p>
+<h3>Do I need a guide?</h3>
+<p>Not for a first visit, since the paths are easy and the hides are clearly set out. A guide helps with the reedbed species, which are often heard before they are seen.</p>
+</div>
+<h2>Sources</h2>
+<ul class="plain">${src.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>
+</div>
+<aside class="glance">
+<h2>At a glance</h2>
+<dl>
+<div><dt class="mono">Where</dt><dd>Arrocampo river reservoir, Cáceres, near the Tagus</dd></div>
+<div><dt class="mono">Status</dt><dd>Special protection area, Natura 2000</dd></div>
+<div><dt class="mono">Best months</dt><dd>Spring and autumn migration, winter for bitterns, summer for herons</dd></div>
+<div><dt class="mono">Star birds</dt><dd>Western Swamphen, Purple Heron, Squacco Heron, Little Bittern, Great Bittern</dd></div>
+<div><dt class="mono">Facilities</dt><dd>Several hides, flat easy paths, parking</dd></div>
+<div><dt class="mono">Also</dt><dd>Otters at dawn from Hide 2</dd></div>
 </dl>
 </aside>
 </div></div></section>`,
