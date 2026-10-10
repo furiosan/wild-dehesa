@@ -4,7 +4,7 @@ export const SITE = {
   url: "https://wilddehesa.com",
   name: "Wild Dehesa",
   tagline: "Birdwatching in Extremadura, Spain",
-  email: "info@wilddehesa.com",
+  email: "caceresruralhoyos@gmail.com",
   casaUrl: "https://casasierradegata.com/en",
   casaName: "Casa Rural Jardín de la Sierra de Gata",
   updated: "2026-10-10",
