@@ -26,7 +26,7 @@ const JS_V = ver("site.js");
 const CRANE = `<svg viewBox="0 0 34 22" aria-hidden="true"><path d="M2 14 Q9 2 17 11 Q25 2 32 14"/></svg>`;
 writeFileSync(join(OUT, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 22"><path d="M2 14 Q9 2 17 11 Q25 2 32 14" fill="none" stroke="#0A7480" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
 
-const NAV = [["Calendar", "/calendar/"], ["Sites", "/sites/"], ["Routes", "/routes/"], ["Guides", "/guides/"], ["Stay", "/stay/"]];
+const NAV = [["Calendar", "/calendar/"], ["Sites", "/sites/"], ["Articles", "/articles/"], ["Routes", "/routes/"], ["Guides", "/guides/"], ["Stay", "/stay/"]];
 const pages = [];
 
 function goLink(name) {
@@ -160,6 +160,7 @@ addPage({
     <h2>What is flying, month by month</h2>
     <p class="sub">Pick a month to see what to look for and where to go.</p>
     ${monthGrid}
+    <div class="callout" style="margin-top:28px"><h3>This winter: the cranes</h3><p>Extremadura is Spain's main wintering ground for the Common Crane. Read when they arrive, where to find them and how to watch without disturbing them.</p><p><a href="/articles/when-to-see-cranes-in-extremadura/">When and where to see cranes in Extremadura</a></p></div>
   </div>
 </section>
 <section class="tint">
@@ -231,6 +232,7 @@ MONTHS.forEach((m, i) => {
     <div><span class="mono">Where to go</span><ul>${d.go.map(goItem).join("")}</ul></div>
   </div>
   ${heatTable({ sel: i })}
+  ${[9, 10, 11, 0, 1, 2].includes(i) ? `<p class="body-text" style="margin-top:28px">Cranes are the headline this month. Read <a href="/articles/when-to-see-cranes-in-extremadura/">when and where to see cranes in Extremadura</a>.</p>` : ""}
   <div class="pager"><a href="/calendar/${slug(prev)}/">&larr; ${prev}</a><a href="/calendar/">All months</a><a href="/calendar/${slug(next)}/">${next} &rarr;</a></div>
   <p class="body-text" style="margin-top:28px">Planning a trip? See the <a href="/routes/">three-day routes</a> or the <a href="/stay/">base in the Sierra de Gata</a>.</p>
 </div></section>`,
@@ -325,7 +327,7 @@ ${COMING.map(([n, t, meta]) => `<article class="site"><h3>${esc(n)}</h3><p>${esc
 <h2 id="birds">Birds of the range</h2>
 <p>The eastern range is an Important Bird Area for resident raptors, including the Spanish Imperial Eagle. The official route lists Black-winged Kite, Griffon Vulture, Black Stork and Nightingale. The landscape mixes pine, heather and broom on the high ground with oak and olive woods, tobacco-drying sheds and open dehesa lower down.</p>
 <h2 id="borbollon">Cranes at Borbollón reservoir</h2>
-<p>The regional guide estimates about 4,000 Common Cranes winter around the Borbollón reservoir, though it gives no date for the count. Treat it as a scale and ask a local guide for recent numbers. The island also holds heron and egret colonies in the breeding season.</p>
+<p>The regional guide estimates about 4,000 Common Cranes winter around the Borbollón reservoir, though it gives no date for the count. Treat it as a scale and ask a local guide for recent numbers. The island also holds heron and egret colonies in the breeding season. For the wider picture, read <a href="/articles/when-to-see-cranes-in-extremadura/">when and where to see cranes in Extremadura</a>.</p>
 <h2 id="alagon">Alagón valley fields</h2>
 <p>Cranes feed by day in open farmland and dehesa near Moraleja, in the Alagón valley close to the Sierra de Gata. Binoculars are enough, and no hide is needed. Late afternoon is when cranes typically return to their roost sites.</p>
 <h2 id="villages">Villages, crafts and trees</h2>
@@ -407,6 +409,97 @@ ${COMING.map(([n, t, meta]) => `<article class="site"><h3>${esc(n)}</h3><p>${esc
 <div><dt class="mono">Star birds</dt><dd>Western Swamphen, Purple Heron, Squacco Heron, Little Bittern, Great Bittern</dd></div>
 <div><dt class="mono">Facilities</dt><dd>Several hides, flat easy paths, parking</dd></div>
 <div><dt class="mono">Also</dt><dd>Otters at dawn from Hide 2</dd></div>
+</dl>
+</aside>
+</div></div></section>`,
+  });
+}
+
+// ---------- Articles ----------
+{
+  const c = crumbs([["Home", "/"], ["Articles", "/articles/"]]);
+  addPage({
+    path: "/articles/",
+    title: "Birdwatching articles for Extremadura | Wild Dehesa",
+    description: "Seasonal birdwatching articles for Extremadura, starting with when and where to see cranes.",
+    ld: [c.ld],
+    body: `${c.html}
+<div class="wrap pagehead"><h1>Articles</h1><p class="lede">Seasonal guides for planning a birdwatching trip to Extremadura.</p></div>
+<section style="padding-top:24px"><div class="wrap"><div class="sites">
+<article class="site"><h3><a href="/articles/when-to-see-cranes-in-extremadura/">When and where to see cranes in Extremadura</a></h3><p>How many cranes winter here, when they arrive, the best sites, and how to watch them without disturbing them.</p><div class="meta"><span class="mono">Winter · Oct to Mar</span><span class="tag full">Article</span></div></article>
+</div></div></section>`,
+  });
+}
+{
+  const c = crumbs([["Home", "/"], ["Articles", "/articles/"], ["Cranes in Extremadura", "/articles/when-to-see-cranes-in-extremadura/"]]);
+  const src = [
+    ["The Crane Festival celebrates the arrival of these birds in Extremadura, Birding in Extremadura", "https://birdinginextremadura.com/en/the-crane-festival-celebrates-the-arrival-of-these-birds-in-extremadura/"],
+    ["Where to see common cranes, Festival de las Grullas, Junta de Extremadura", "https://festivaldelasgrullas.juntaex.es/en/la-grulla/donde-ver-las-grullas"],
+    ["Common Crane, Birding in Extremadura", "https://birdinginextremadura.com/en/ave/grulla-comun-en/"],
+    ["Crane watching on the Gabriel y Galán reservoir, Turismo Ambroz Caparra", "https://turismoambrozcaparra.es/crane-watching-on-the-gabriel-y-galan-reservoir/?lang=en"],
+    ["Cranes in Extremadura, PlanVex", "https://planvex.es/web/2015/11/cranes-extremadura/"],
+    ["Sierra de Gata route, Birding in Extremadura", "https://www.birdinginextremadura.com/en/extremadura-aves/detalles/25e30725-df2b-11e3-9bf9-e41f13b8b5fa"],
+    ["Winter birding in Extremadura, BirdGuides", "https://www.birdguides.com/articles/winter-birding-in-extremadura/"],
+  ];
+  addPage({
+    path: "/articles/when-to-see-cranes-in-extremadura/",
+    title: "When and where to see cranes in Extremadura | Wild Dehesa",
+    description: "Extremadura is Spain's main wintering ground for Common Cranes. When they arrive, where to find them, the best sites and how to watch without disturbing them.",
+    ogType: "article",
+    ld: [c.ld, { "@context": "https://schema.org", "@type": "Article", headline: "When and where to see cranes in Extremadura", dateModified: SITE.updated, author: { "@type": "Organization", name: SITE.name }, publisher: { "@type": "Organization", name: SITE.name, url: SITE.url }, mainEntityOfPage: SITE.url + "/articles/when-to-see-cranes-in-extremadura/" }],
+    body: `${c.html}
+<div class="wrap pagehead"><h1>When and where to see cranes in Extremadura</h1><p class="lede">Extremadura is Spain's main wintering ground for the Common Crane. Here is when they arrive, where to find them, and how to watch without disturbing them.</p></div>
+<section style="padding-top:24px"><div class="wrap"><div class="article">
+<div class="prose">
+<h2>How many cranes winter here</h2>
+<p>The latest national census by the group Grus Extremadura counted 118,171 cranes wintering in the region in 2024 and 2025, out of about 260,000 across Spain. Extremadura holds the largest share of any region.</p>
+<p>The official crane programme divides the region into 11 wintering sectors. The Central Zone, Azuaga and Navalmoral de la Mata hold the most birds. A typical sector holds between 1,600 and 3,800 cranes, and about three in four of the region's cranes gather at core sites with more than 2,000 birds.</p>
+<h2>When to go</h2>
+<p>Cranes arrive from northern Europe in autumn, spend the winter in the region, and leave toward the end of winter. Exact dates change with the year and the weather. As a guide, the first birds appear in <a href="/calendar/october/">October</a>, numbers build through <a href="/calendar/november/">November</a>, and <a href="/calendar/december/">December</a>, <a href="/calendar/january/">January</a> and <a href="/calendar/february/">February</a> are the safest months. By <a href="/calendar/march/">March</a> they are thinning out.</p>
+<p>Cranes have not bred in Extremadura since the early 20th century, so every crane you see here is a winter visitor. The species is listed as of special concern in the region.</p>
+<h2>Where to find them</h2>
+<p>Cranes live in the dehesa, in irrigated crops such as rice fields, in other crops and grassland, and at reservoirs and ponds. They feed in open country by day and gather at water to roost.</p>
+<p>The official guidance carries one warning that matters for any trip: locations shift during the winter. Changes in crops, water levels in reservoirs and ponds, and disturbance all move the birds around, so a site that works in November may be empty in February. Ask a local guide or your host where the flocks were this week.</p>
+<h3>Good places to start</h3>
+<ul class="plain">
+<li><strong>Borbollón reservoir and the <a href="/sites/sierra-de-gata/#borbollon">Sierra de Gata</a>.</strong> The regional guide estimates about 4,000 cranes in this area, though it does not date the count.</li>
+<li><strong><a href="/sites/sierra-de-gata/#alagon">Alagón valley fields</a>.</strong> Cranes feed in open farmland near Moraleja, close to the Sierra de Gata.</li>
+<li><strong>Gabriel y Galán reservoir.</strong> More than 2,000 cranes winter here, making it the largest crane roost in northern Extremadura. They gather on the banks with geese, ducks, Great Cormorants, Ospreys and Black Vultures. You can watch on foot or from a boat.</li>
+<li><strong><a href="/sites/monfrague/#cranes">Monfragüe</a>.</strong> The Tiétar river near the Bazagona bridge is a roosting area, and a regional guide calls it the most intimate place to see them.</li>
+<li><strong>Navalvillar de Pela, in Badajoz.</strong> A regional guide singles it out for cranes returning to roost in the afternoon.</li>
+</ul>
+<h2>How to watch well</h2>
+<p>You do not need a hide to see cranes. A good pair of binoculars is enough, and a telescope helps with distant flocks. Cranes follow a daily rhythm, flying out from the roost to feed and returning in the afternoon, so the start and end of the day are the best times to watch the movements.</p>
+<p>Our advice is to keep your distance, watch from your vehicle or a track where you can, and never walk toward a feeding flock to make it fly. Disturbance is one of the things that moves the birds away from a site, and it also costs them energy in the coldest months.</p>
+<h2>The Crane Festival</h2>
+<p>The Festival de las Grullas is an annual event run by the Extremadura tourist board to welcome the cranes. The 17th edition was held in early December 2025 in Madrigalejo, with more than thirty activities including birdwatching routes, a photography workshop, technical talks and children's workshops. Dates and venues change each year, so check the festival's website before you plan around it.</p>
+<h2>What else to see in winter</h2>
+<p>Cranes are not the only reason to come. A BirdGuides winter report describes Great Bustards gathering in winter quarters and Little Bustard flocks of 500 or more, Red Kites replacing Black Kites, Spanish Imperial Eagles displaying over their nests by January, and Eagle Owls breeding by midwinter. The <a href="/calendar/january/">January page</a> lists what else to look for.</p>
+<h2>Plan the trip</h2>
+<p>The <a href="/routes/#winter-cranes">three-day winter crane route</a> starts in the Sierra de Gata and ends in Monfragüe. For a base in the Sierra de Gata, see <a href="/stay/">where to stay</a>.</p>
+<div class="faq">
+<h2>Questions</h2>
+<h3>Which month is best for seeing cranes in Extremadura?</h3>
+<p>November to February is the safest window, when the birds have arrived and settled. October brings the first arrivals and March the departures, with dates varying by year.</p>
+<h3>Do cranes breed in Extremadura?</h3>
+<p>No. They have not bred in the region since the early 20th century, and all cranes seen here are winter visitors from northern Europe.</p>
+<h3>Do I need a hide or a guide to see cranes?</h3>
+<p>No hide is needed. Binoculars are enough for flocks feeding in open country. A local guide is useful because the flocks move between sites during the winter.</p>
+<h3>How many cranes winter in Extremadura?</h3>
+<p>The 2024 and 2025 census counted 118,171 in the region, out of about 260,000 across Spain.</p>
+</div>
+<h2>Sources</h2>
+<ul class="plain">${src.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>
+</div>
+<aside class="glance">
+<h2>At a glance</h2>
+<dl>
+<div><dt class="mono">Season</dt><dd>Arrive in autumn, winter in the region, leave toward the end of winter</dd></div>
+<div><dt class="mono">Safest months</dt><dd>November to February</dd></div>
+<div><dt class="mono">Region count</dt><dd>118,171 in 2024 and 2025, about 260,000 in Spain</dd></div>
+<div><dt class="mono">Habitats</dt><dd>Dehesa, rice fields, crops, reservoirs and ponds</dd></div>
+<div><dt class="mono">Best times of day</dt><dd>The start and end of the day, when they leave and return to roost</dd></div>
+<div><dt class="mono">Kit</dt><dd>Binoculars, ideally a telescope</dd></div>
 </dl>
 </aside>
 </div></div></section>`,
